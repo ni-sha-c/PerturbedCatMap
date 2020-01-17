@@ -165,11 +165,11 @@ if __name__ == "__main__":
     s_cc = s_c.conjugate()
     z1_fixed = (1.0 + s_c)/\
             (1 + s_cc)
-    z2_fixed = 1.0
-    u0_fixed = 1/(2*pi)*arctan2(\
+    z2_fixed = 1 - 1/z1_fixed
+    u0_fixed = (1/pi)*arctan2(\
             z1_fixed.imag,\
             z1_fixed.real) % 1
-    u1_fixed =1/(2*pi)*arctan2(\
+    u1_fixed =(1/pi)*arctan2(\
             z2_fixed.imag,\
             z2_fixed.real) % 1
     u_fixed = array([u0_fixed,\
@@ -178,7 +178,7 @@ if __name__ == "__main__":
             10,1))
     #m = 1000
     #u_trj = step(u,s,n,m) 
-
+    
 
     
 
