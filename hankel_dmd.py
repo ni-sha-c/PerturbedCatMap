@@ -4,7 +4,7 @@ from step import *
 '''
     Plots eigenvalues of an nxn matrix K that solves 
     the least squares problem,
-        || Y - K X ||^2, 
+        K_edmd = argmin_{K in R^{nxn}} || Y - K X ||^2, 
     where X and Y are nxn matrices with elements,
         X[i,j] = psi_i(u_j)
         Y[i,j] = psi_i(u_{j+1})
