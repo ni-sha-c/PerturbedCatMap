@@ -19,6 +19,32 @@ def step(u, s=[0.,0.], n=1, m=1):
         u_trj[i+1,0] = (2*x + y + psix) % 1
         u_trj[i+1,1] = (x + y + psix) % 1
     return u_trj
+def inverse_step(u, s=[0.,0.], n=1, m=1):
+    """
+    n: number of timesteps
+    m: number of initial conditions
+    s[0] = abs(lambda), s[1] = alpha
+    output size: (n+1)xdxm
+    """
+    #Psi1 = lambda phi: (1/pi)*arctan(-s[0]*sin(2*pi*phi +s[1])\
+     #       /(1. - s[0]*cos(2*pi*phi + s[1])))
+    Psi2 = lambda phi: (1/pi)*arctan(s[0]*sin(2*pi*phi-s[1])\
+            /(1. - s[0]*cos(2*pi*phi - s[1])))
+
+    u_trj = empty((n+1,2,m))
+    u_trj[0,0] = u[0]
+    u_trj[0,1] = u[1]
+    for i in range(n):
+        x = u_trj[i,0]
+        y = u_trj[i,1]
+
+        #psi1 = Psi1(x-y)
+        psi2 = Psi2(x-y)
+        u_trj[i+1,0] = (x - y) % 1
+        u_trj[i+1,1] = (-x + 2*y - psi2) % 1
+    return u_trj
+
+
 def dstep(u, s=[0.,0.], m=1):
     """
     Input info:
